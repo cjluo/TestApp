@@ -5,6 +5,20 @@
 	android:orientation="vertical">
 
     <TextView
+        android:id="@+id/urlText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.0"
+        android:text="URL" />
+    
+    <EditText
+        android:id="@+id/urlAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://192.168.1.62:80/">
+    </EditText>
+    
+    <TextView
         android:id="@+id/downloadview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +32,7 @@
     </EditText>
     
     <Button
-        android:id="@+id/downLoad"
+        android:id="@+id/download"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Download" />
@@ -31,13 +45,13 @@
         android:text="Upload File" />
     
     <EditText
-        android:id="@+id/upLoadfile"
+        android:id="@+id/uploadfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </EditText>
     
     <Button
-        android:id="@+id/upLoad"
+        android:id="@+id/upload"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Upload" />
