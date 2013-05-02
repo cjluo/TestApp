@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class FromFile {
+public class FormFile {
 	private byte[] data;
 	private InputStream inStream;
 	private File file;
@@ -13,7 +13,7 @@ public class FromFile {
 	private String parameterName;
 	private String contentType = "application/octet-stream";
 	
-	public FromFile(String filename, byte[] data, String parameterName, String contentType){
+	public FormFile(String filename, byte[] data, String parameterName, String contentType){
 		this.data = data;
 		this.filename = filename;
 		this.parameterName = parameterName;
@@ -21,7 +21,7 @@ public class FromFile {
 			this.contentType = contentType;
 	}
 	
-	public FromFile(String filename, File file, String parameterName, String contentType){
+	public FormFile(String filename, File file, String parameterName, String contentType){
 		this.filename = filename;
 		this.parameterName = parameterName;
 		this.file = file;
@@ -43,7 +43,7 @@ public class FromFile {
 		return inStream;
 	}
 	
-	public byte[] getDate(){
+	public byte[] getData(){
 		return data;
 	}
 	
