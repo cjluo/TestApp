@@ -71,7 +71,7 @@ public class HttpDownloader {
 			inputStream = urlConn.getInputStream();
 		} catch(MalformedURLException e) {
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return inputStream;
