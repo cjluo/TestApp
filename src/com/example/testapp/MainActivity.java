@@ -49,8 +49,7 @@ public class MainActivity extends Activity {
 			String urlmsg = urlAddress.getText().toString();
 			Log.i(TAG, "if exists: " + downloadmsg);
 			HttpDownloader downloader = new HttpDownloader();
-			int result = downloader.downFile(urlmsg+downloadmsg, "test/", downloadmsg);
-			System.out.println(result);
+			downloader.execute(urlmsg+downloadmsg, "test/", downloadmsg);
 		}
 	}
 	

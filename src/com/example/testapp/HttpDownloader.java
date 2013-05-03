@@ -9,7 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HttpDownloader {
+import android.os.AsyncTask;
+
+public class HttpDownloader extends AsyncTask<String, Void, Integer>{
 	private URL url = null;
 	
 	public String download(String urlStr) {
@@ -75,6 +77,16 @@ public class HttpDownloader {
 			e.printStackTrace();
 		}
 		return inputStream;
+	}
+
+	@Override
+	protected Integer doInBackground(String... params) {
+		return downFile(params[0], params[1], params[2]);
+	}
+	
+	@Override
+	protected void onPostExecute(Integer result) {
+		System.out.println(result);
 	}
 }
 
