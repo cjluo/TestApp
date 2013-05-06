@@ -15,7 +15,7 @@
         android:id="@+id/urlAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="http://a.xnimg.cn/wap/">
+        android:text="http://192.168.1.6/test/">
     </EditText>
     
     <TextView
@@ -29,7 +29,7 @@
         android:id="@+id/downloadfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="apple_icon_.png">
+        android:text="adb">
     </EditText>
     
     <Button

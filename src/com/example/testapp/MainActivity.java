@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -48,6 +50,17 @@ public class MainActivity extends Activity {
 			String downloadmsg = downloadText.getText().toString();
 			String urlmsg = urlAddress.getText().toString();
 			Log.i(TAG, "if exists: " + downloadmsg);
+			
+//			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+//			while(pm.isScreenOn()) {
+//				try {
+//					Thread.sleep(1000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+			
 			HttpDownloader downloader = new HttpDownloader();
 			downloader.execute(urlmsg+downloadmsg, "test/", downloadmsg);
 		}

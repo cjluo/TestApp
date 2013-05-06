@@ -42,14 +42,13 @@ public class HttpDownloader extends AsyncTask<String, Void, Integer>{
 		try {
 			FileUtils fileUtils = new FileUtils();
 			
-			if(fileUtils.isFileExist(path + fileName)) {
-				return 1;
-			} else {
-				inputStream = getInputStreamFromURL(urlStr);
-				File resultFile = fileUtils.write2SDFromInput(path, fileName, inputStream);
-				if(resultFile == null) {
-					return -1;
-				}
+			fileUtils.deleteFileifExist(path + fileName);
+
+			inputStream = getInputStreamFromURL(urlStr);
+			assert (inputStream != null);
+			File resultFile = fileUtils.write2SDFromInput(path, fileName, inputStream);
+			if(resultFile == null) {
+				return -1;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -83,6 +82,11 @@ public class HttpDownloader extends AsyncTask<String, Void, Integer>{
 	protected Integer doInBackground(String... params) {
 		return downFile(params[0], params[1], params[2]);
 	}
+	
+//	@Override
+//    protected void onPreExecute(){
+//		Toast.makeText(getApplicationContext(),"<clink, clink>", Toast.LENGTH_SHORT).show();
+//    }
 	
 	@Override
 	protected void onPostExecute(Integer result) {
