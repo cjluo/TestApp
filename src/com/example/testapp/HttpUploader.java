@@ -6,7 +6,9 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.Map;
 
-public class HttpUploader {
+import android.os.AsyncTask;
+
+public class HttpUploader extends AsyncTask<Object, Void, Boolean> {
 	public static boolean post(String path, Map<String, String> params, FormFile[] files) throws Exception {
 		final String BOUNDARY = "---------------------------7da2137580612";
 		final String endline = BOUNDARY + "--\r\n";
@@ -92,5 +94,16 @@ public class HttpUploader {
 	
 	public static boolean post(String path, Map<String, String> params, FormFile file) throws Exception{
 		return post(path, params, new FormFile[]{file});
+	}
+
+	@Override
+	protected Boolean doInBackground(Object... params) {
+		try {
+			return post((String)params[0], (Map<String, String>)params[1], (FormFile)params[2]);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

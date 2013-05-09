@@ -62,7 +62,7 @@ public class FileUtils {
 			byte buffer[] = new byte[4*1024];
 			int length = 0;
 			while((length = inputStream.read(buffer)) != -1){
-				//output.write(buffer, 0, length);
+				output.write(buffer, 0, length);
 				System.out.println(length);
 			}
 			output.flush();

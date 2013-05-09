@@ -46,20 +46,19 @@ public class MainActivity extends Activity {
 	}
 	
 	class DownloadListener implements Button.OnClickListener {
+		
 		public void onClick(View v) {
 			String downloadmsg = downloadText.getText().toString();
 			String urlmsg = urlAddress.getText().toString();
 			Log.i(TAG, "if exists: " + downloadmsg);
 			
-//			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-//			while(pm.isScreenOn()) {
-//				try {
-//					Thread.sleep(1000);
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
+			NativeInput keys = new NativeInput();
+			keys.SendKey(116, true);
+			keys.SendKey(116, false);
+		
+			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+			PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DimScreen");
+			wl.acquire();
 			
 			HttpDownloader downloader = new HttpDownloader();
 			downloader.execute(urlmsg+downloadmsg, "test/", downloadmsg);
@@ -81,14 +80,20 @@ public class MainActivity extends Activity {
 	}
 	
 	public void uploadFile(File imageFile) {
-		try {
-			String requestUrl = urlAddress.getText().toString();
-			Map<String, String> params = new HashMap<String, String>();
-			FormFile formfile = new FormFile(imageFile.getName(), imageFile, "image", "application/octet-stream");
-			HttpUploader.post(requestUrl, params, formfile);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		String requestUrl = urlAddress.getText().toString();
+		Map<String, String> params = new HashMap<String, String>();
+		FormFile formfile = new FormFile(imageFile.getName(), imageFile, "image", "application/octet-stream");
+		
+		NativeInput keys = new NativeInput();
+		keys.SendKey(116, true);
+		keys.SendKey(116, false);
+		
+		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DimScreen");
+		wl.acquire();
+		
+		HttpUploader uploader = new HttpUploader();
+		uploader.execute((Object)requestUrl, (Object)params, (Object)formfile);
 	}
 
 	@Override
