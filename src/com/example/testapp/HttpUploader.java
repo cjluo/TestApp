@@ -106,4 +106,12 @@ public class HttpUploader extends AsyncTask<Object, Void, Boolean> {
 		}
 		return false;
 	}
+	
+	@Override
+	protected void onPostExecute(Boolean result) {
+		MainActivity.keys.SendKey(116, true);
+		MainActivity.keys.SendKey(116, false);		
+		MainActivity.wl.release();
+		System.out.println(result);
+	}
 }

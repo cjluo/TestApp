@@ -83,13 +83,11 @@ public class HttpDownloader extends AsyncTask<String, Void, Integer>{
 		return downFile(params[0], params[1], params[2]);
 	}
 	
-//	@Override
-//    protected void onPreExecute(){
-//		Toast.makeText(getApplicationContext(),"<clink, clink>", Toast.LENGTH_SHORT).show();
-//    }
-	
 	@Override
 	protected void onPostExecute(Integer result) {
+		MainActivity.keys.SendKey(116, true);
+		MainActivity.keys.SendKey(116, false);		
+		MainActivity.wl.release();
 		System.out.println(result);
 	}
 }

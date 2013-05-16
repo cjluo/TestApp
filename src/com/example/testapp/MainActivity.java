@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
 	private Handler handler;
 	private static final String TAG="MainActivity";
 	
+	public static PowerManager pm;
+	public static PowerManager.WakeLock wl;
+	public static NativeInput keys = new NativeInput();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,9 @@ public class MainActivity extends Activity {
 		uploadButton = (Button)findViewById(R.id.upload);
 		uploadButton.setOnClickListener(new UploadfileListener());
 		
+		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DimScreen");
+		
 	}
 	
 	class DownloadListener implements Button.OnClickListener {
@@ -52,13 +58,16 @@ public class MainActivity extends Activity {
 			String urlmsg = urlAddress.getText().toString();
 			Log.i(TAG, "if exists: " + downloadmsg);
 			
-			NativeInput keys = new NativeInput();
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			wl.acquire();			
 			keys.SendKey(116, true);
-			keys.SendKey(116, false);
-		
-			PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-			PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DimScreen");
-			wl.acquire();
+			keys.SendKey(116, false);		
 			
 			HttpDownloader downloader = new HttpDownloader();
 			downloader.execute(urlmsg+downloadmsg, "test/", downloadmsg);
@@ -84,13 +93,16 @@ public class MainActivity extends Activity {
 		Map<String, String> params = new HashMap<String, String>();
 		FormFile formfile = new FormFile(imageFile.getName(), imageFile, "image", "application/octet-stream");
 		
-		NativeInput keys = new NativeInput();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		wl.acquire();			
 		keys.SendKey(116, true);
 		keys.SendKey(116, false);
-		
-		PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-		PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DimScreen");
-		wl.acquire();
 		
 		HttpUploader uploader = new HttpUploader();
 		uploader.execute((Object)requestUrl, (Object)params, (Object)formfile);
